@@ -52,7 +52,8 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(install)
     }
 
         // Append the bundle identifier to the URL
-    NSURL *finalURL = [appSupportDirURL URLByAppendingPathComponent:[[NSBundle mainBundle] bundleIdentifier] isDirectory:YES];
+     NSString *uniqueNamespace = @"com.yourcompany.blitzliquidWalletKit";
+    NSURL *finalURL = [appSupportDirURL URLByAppendingPathComponent:uniqueNamespace isDirectory:YES];
 
 
     // Create the directory
@@ -62,7 +63,6 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(install)
                                                        error:&error]) {
         throw jsi::JSError(runtime, "Error creating session directory");
     }
-
     NSString* path = [finalURL path];
     const char* cString = [path UTF8String];
 
